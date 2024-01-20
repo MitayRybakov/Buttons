@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ButtonsTest</string>
+    <string name="error_message">Ошибка при выполнени запроса </string>
+</resources>
