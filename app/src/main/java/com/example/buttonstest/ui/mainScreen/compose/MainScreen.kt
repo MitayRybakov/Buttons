@@ -30,7 +30,6 @@ fun MainScreen(viewModel: MainViewModel) {
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
-
     when (val immutableState = state) {
 
         is ScreenState.Loading -> {
