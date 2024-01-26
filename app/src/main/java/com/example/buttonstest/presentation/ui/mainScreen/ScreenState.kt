@@ -1,4 +1,4 @@
-package com.example.buttonstest.ui.mainScreen
+package com.example.buttonstest.presentation.ui.mainScreen
 
 sealed class ScreenState {
     data object Loading : ScreenState()

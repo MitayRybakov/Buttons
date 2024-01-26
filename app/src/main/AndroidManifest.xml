@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ButtonsTest"
-        android:name=".ui.ButtonTestApp"
+        android:name=".ButtonsTestApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.dataScreen.DataActivity"
+            android:name=".presentation.ui.dataScreen.DataActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.mainScreen.MainActivity"
+            android:name=".presentation.ui.mainScreen.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ButtonsTest">
             <intent-filter>

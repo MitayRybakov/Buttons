@@ -1,8 +1,10 @@
-package com.example.buttonstest.ui.mainScreen
+package com.example.buttonstest.presentation.ui.mainScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.buttonstest.ui.ButtonTestApp
+import com.example.buttonstest.domain.usecase.GetDigitsUseCase
+import com.example.buttonstest.domain.usecase.LoadDigitsUseCase
+import com.example.buttonstest.ButtonsTestApp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,12 +13,13 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 
-    private val  repository = ButtonTestApp.instance.getRepository()
+    private val getDigitsUseCase = GetDigitsUseCase(ButtonsTestApp.instance.getRepository())
+    private val loadDigitsUseCase = LoadDigitsUseCase(ButtonsTestApp.instance.getRepository())
 
     private val _uiState = MutableStateFlow<ScreenState>(ScreenState.Initial("Начальный"))
     val uiState: StateFlow<ScreenState> = _uiState.asStateFlow()
 
-    fun loadInfo() {
+    fun setSuccessState() {
         _uiState.value = ScreenState.Loading
 
         viewModelScope.launch {
@@ -25,7 +28,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun sendInfo() {
+    fun setErrorState() {
         _uiState.value = ScreenState.Loading
 
         viewModelScope.launch {
@@ -34,9 +37,9 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun randomData() {
+    fun generateDigit() {
         viewModelScope.launch {
-            repository.randomDataRepository()
+            loadDigitsUseCase()
         }
     }
 }

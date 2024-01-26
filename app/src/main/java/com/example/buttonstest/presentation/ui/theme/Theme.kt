@@ -1,4 +1,4 @@
-package com.example.buttonstest.ui.theme
+package com.example.buttonstest.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build

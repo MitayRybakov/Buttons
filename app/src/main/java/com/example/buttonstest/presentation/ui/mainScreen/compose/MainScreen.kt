@@ -1,4 +1,4 @@
-package com.example.buttonstest.ui.mainScreen.compose
+package com.example.buttonstest.presentation.ui.mainScreen.compose
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -19,19 +19,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.buttonstest.ui.dataScreen.DataActivity
-import com.example.buttonstest.ui.mainScreen.MainViewModel
-import com.example.buttonstest.ui.mainScreen.ScreenState
-
+import com.example.buttonstest.presentation.ui.dataScreen.DataActivity
+import com.example.buttonstest.presentation.ui.mainScreen.MainViewModel
+import com.example.buttonstest.presentation.ui.mainScreen.ScreenState
 
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
-
     val state by viewModel.uiState.collectAsState()
     val context = LocalContext.current
 
     when (val immutableState = state) {
-
         is ScreenState.Loading -> {
             LoadingScreen()
         }
@@ -39,10 +36,10 @@ fun MainScreen(viewModel: MainViewModel) {
         is ScreenState.Success -> {
             SuccessScreen(
                 state = immutableState,
-                onSuccessClick = { viewModel.loadInfo() },
-                onErrorClick = { viewModel.sendInfo() },
+                onSuccessClick = { viewModel.setSuccessState() },
+                onErrorClick = { viewModel.setErrorState() },
                 onNextClick = {
-                    viewModel.randomData()
+                    viewModel.generateDigit()
                     context.startDataActivity()
                 },
             )
@@ -51,10 +48,10 @@ fun MainScreen(viewModel: MainViewModel) {
         is ScreenState.Initial -> {
             InitialScreen(
                 state = immutableState,
-                onSuccessClick = { viewModel.loadInfo() },
-                onErrorClick = { viewModel.sendInfo() },
+                onSuccessClick = { viewModel.setSuccessState() },
+                onErrorClick = { viewModel.setErrorState() },
                 onNextClick = {
-                    viewModel.randomData()
+                    viewModel.generateDigit()
                     context.startDataActivity()
                 },
             )
@@ -63,10 +60,10 @@ fun MainScreen(viewModel: MainViewModel) {
         is ScreenState.Error -> {
             ErrorScreen(
                 state = immutableState,
-                onSuccessClick = { viewModel.loadInfo() },
-                onErrorClick = { viewModel.sendInfo() },
+                onSuccessClick = { viewModel.setSuccessState() },
+                onErrorClick = { viewModel.setErrorState() },
                 onNextClick = {
-                    viewModel.randomData()
+                    viewModel.generateDigit()
                     context.startDataActivity()
                 },
             )
@@ -93,7 +90,6 @@ private fun ErrorScreen(
                 .background(color = Color.Red)
                 .fillMaxWidth()
         ) {
-
             Text(
                 text = state.text,
                 modifier = Modifier
@@ -101,6 +97,7 @@ private fun ErrorScreen(
                 fontSize = 44.sp
             )
         }
+
         ButtonComponent(
             onSuccessClick = onSuccessClick,
             onErrorClick = onErrorClick,
@@ -128,14 +125,14 @@ private fun InitialScreen(
                 .background(color = Color.White)
                 .fillMaxWidth()
         ) {
-
             Text(
                 text = state.text,
                 modifier = Modifier
                     .padding(vertical = 50.dp),
                 fontSize = 44.sp
-                )
+            )
         }
+
         ButtonComponent(
             onSuccessClick = onSuccessClick,
             onErrorClick = onErrorClick,
@@ -163,14 +160,14 @@ private fun SuccessScreen(
                 .background(color = Color.Green)
                 .fillMaxWidth()
         ) {
-
             Text(
                 text = state.text,
                 modifier = Modifier
                     .padding(vertical = 50.dp),
                 fontSize = 44.sp
-                )
+            )
         }
+
         ButtonComponent(
             onSuccessClick = onSuccessClick,
             onErrorClick = onErrorClick,
