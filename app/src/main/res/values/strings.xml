@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">ButtonsTest</string>
-    <string name="error_message">Ошибка при выполнени запроса </string>
+    <string name="error_message">Ошибка при выполнении запроса</string>
+    <string name="button_success">Успех</string>
+    <string name="button_error">Ошибка</string>
+    <string name="button_next">Следующий</string>
+    <string name="button_previous">Назад</string>
 </resources>

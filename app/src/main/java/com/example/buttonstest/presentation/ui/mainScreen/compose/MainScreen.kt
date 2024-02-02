@@ -17,8 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.buttonstest.R
 import com.example.buttonstest.presentation.ui.dataScreen.DataActivity
 import com.example.buttonstest.presentation.ui.mainScreen.MainViewModel
 import com.example.buttonstest.presentation.ui.mainScreen.ScreenState
@@ -84,19 +86,7 @@ private fun ErrorScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(color = Color.Red)
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = state.text,
-                modifier = Modifier
-                    .padding(vertical = 50.dp),
-                fontSize = 44.sp
-            )
-        }
+        TextScreenComponent(text = state.text)
 
         ButtonComponent(
             onSuccessClick = onSuccessClick,
@@ -119,19 +109,7 @@ private fun InitialScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(color = Color.White)
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = state.text,
-                modifier = Modifier
-                    .padding(vertical = 50.dp),
-                fontSize = 44.sp
-            )
-        }
+        TextScreenComponent(text = state.text)
 
         ButtonComponent(
             onSuccessClick = onSuccessClick,
@@ -154,19 +132,7 @@ private fun SuccessScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .background(color = Color.Green)
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = state.text,
-                modifier = Modifier
-                    .padding(vertical = 50.dp),
-                fontSize = 44.sp
-            )
-        }
+        TextScreenComponent(text = state.text)
 
         ButtonComponent(
             onSuccessClick = onSuccessClick,
@@ -189,6 +155,23 @@ private fun Context.startDataActivity() {
 }
 
 @Composable
+private  fun TextScreenComponent(text:String) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .background(color = Color.White)
+            .fillMaxWidth()
+    ) {
+        Text(
+            text = text,
+            modifier = Modifier
+                .padding(vertical = 50.dp),
+            fontSize = 44.sp
+        )
+    }
+}
+
+@Composable
 private fun ButtonComponent(
     onSuccessClick: () -> Unit,
     onErrorClick: () -> Unit,
@@ -201,9 +184,9 @@ private fun ButtonComponent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Bottom
     ) {
-        ButtonText(name = "Успех", onSuccessClick)
-        ButtonText(name = "Ошибка", onErrorClick)
-        ButtonText(name = "Следующий", onNextClick)
+        ButtonText(name = stringResource(id = R.string.button_success), onSuccessClick)
+        ButtonText(name = stringResource(id = R.string.button_error), onErrorClick)
+        ButtonText(name = stringResource(id = R.string.button_next), onNextClick)
     }
 }
 
