@@ -1,6 +1,8 @@
 package com.example.buttonstest.presentation.ui.dataScreen.compose
 
 import androidx.activity.ComponentActivity
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,16 +18,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
+import com.example.buttonstest.R
 import com.example.buttonstest.presentation.ui.dataScreen.DataScreenState
 import com.example.buttonstest.presentation.ui.dataScreen.DataViewModel
 
 @Composable
 fun DataScreen(viewModel:DataViewModel) {
     val state by viewModel.uiState.collectAsState()
-    val activity = LocalContext.current as? ComponentActivity
+    val onBackPressedDispatcher = LocalOnBackPressedDispatcherOwner.current?.onBackPressedDispatcher
 
     when (val immutable = state) {
         is DataScreenState.Data -> {
@@ -57,11 +61,11 @@ fun DataScreen(viewModel:DataViewModel) {
                         modifier = Modifier
                             .fillMaxWidth(),
                         onClick = {
-                            activity?.onBackPressed()
+                            onBackPressedDispatcher?.onBackPressed()
                         }
                     ) {
                         Text(
-                            text = "Назад",
+                            text = stringResource(id = R.string.button_previous),
                             modifier = Modifier
                                 .padding(all = 10.dp),
                             fontSize = 22.sp
